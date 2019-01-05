@@ -1,0 +1,5 @@
+---
+- name: Ensure dependencies are installed
+  apt:
+    name: "{{ plantd_broker_packages }}"
+    state: present

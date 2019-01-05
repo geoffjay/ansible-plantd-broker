@@ -1,0 +1,15 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: geoffjay
+  description: Plantd Broker server for Linux.
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  role_name: plantdbroker
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+  galaxy_tags:
+    - plantd

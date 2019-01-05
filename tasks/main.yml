@@ -1,0 +1,34 @@
+---
+# Variable configuration
+- include_tasks: variables.yml
+
+# Setup/install tasks
+- include_tasks: setup-debian.yml
+  when: ansible_os_family == 'Debian'
+
+# TODO: - include_tasks: build.yml
+- name: Get the broker service repository
+  git:
+    repo: https://gitlab.com/crdc/apex/broker
+    dest: /usr/src/go/src/gitlab.com/crdc/apex/broker
+  tags: [ "plantd-broker" ]
+
+- name: Build the broker service
+  shell: make all
+  args:
+    chdir: /usr/src/go/src/gitlab.com/crdc/apex/broker
+  tags: [ "plantd-broker" ]
+
+# TODO: - include_tasks: initialize.yml
+# TODO: - include_tasks: configure.yml
+
+- name: Ensure Plantd Broker is started and enabled on boot.
+  service:
+    name: "{{ plantd_broker_daemon }}"
+    state: "{{ plantd_broker_service_state }}"
+    enabled: "{{ plantd_broker_service_enabled }}"
+  tags: [ "plantd-broker" ]
+
+# Configure Plantd Broker
+#- import_tasks: databases.yml
+#- import_tasks: users.yml

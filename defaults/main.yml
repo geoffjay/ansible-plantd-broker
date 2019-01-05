@@ -1,0 +1,10 @@
+---
+# Set the service state when configuration changes are made. Recommended values:
+# `restarted` or `reloaded`
+plantd_broker_restarted_state: "restarted"
+
+plantd_broker_user: plantd
+plantd_broker_group: plantd
+
+plantd_broker_service_state: started
+plantd_broker_service_enabled: true

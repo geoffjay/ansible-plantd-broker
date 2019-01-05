@@ -1,0 +1,6 @@
+---
+- name: restart plantd-broker
+  service:
+    name: "{{ plantd_broker_daemon }}"
+    state: "{{ plantd_broker_restarted_state }}"
+    sleep: 5

@@ -1,0 +1,20 @@
+---
+# Variable configuration.
+- name: Include OS-specific variables (Debian)
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Define plantd_broker_packages
+  set_fact:
+    plantd_broker_packages: "{{ __plantd_broker_packages | list }}"
+  when: plantd_broker_packages is not defined
+
+- name: Define plantd_broker_version
+  set_fact:
+    plantd_broker_version: "{{ __plantd_broker_version }}"
+  when: plantd_broker_version is not defined
+
+- name: Define plantd_broker_daemon
+  set_fact:
+    plantd_broker_daemon: "{{ __plantd_broker_daemon }}"
+  when: plantd_broker_daemon is not defined

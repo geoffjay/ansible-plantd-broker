@@ -1,0 +1,6 @@
+*.*~
+*.sw[op]
+
+*.retry
+*/__pycache__
+*.pyc
