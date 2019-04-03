@@ -1,8 +1,12 @@
 ---
 # Variable configuration.
-- name: Include OS-specific variables (Debian)
+- name: Include OS-specific variables (Debian stable)
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and ansible_distribution_version != 'buster/sid'
+
+- name: Include OS-specific variables (Debian testing)
+  include_vars: "{{ ansible_distribution }}-10.yml"
+  when: ansible_os_family == 'Debian' and ansible_distribution_version == 'buster/sid'
 
 - name: Define plantd_broker_packages
   set_fact:
