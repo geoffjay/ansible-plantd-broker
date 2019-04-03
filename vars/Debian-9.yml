@@ -1,6 +1,5 @@
 ---
 __plantd_broker_version: "0.1.0"
-__plantd_broker_daemon: "apex-broker"
+__plantd_broker_daemon: "plantd-broker"
 __plantd_broker_packages:
   - build-essential
-  - protobuf-compiler
