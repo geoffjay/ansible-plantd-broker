@@ -8,11 +8,6 @@
   include_vars: "{{ ansible_distribution }}-10.yml"
   when: ansible_os_family == 'Debian' and ansible_distribution_version == 'buster/sid'
 
-- name: Define plantd_broker_packages
-  set_fact:
-    plantd_broker_packages: "{{ __plantd_broker_packages | list }}"
-  when: plantd_broker_packages is not defined
-
 - name: Define plantd_broker_version
   set_fact:
     plantd_broker_version: "{{ __plantd_broker_version }}"
@@ -22,3 +17,13 @@
   set_fact:
     plantd_broker_daemon: "{{ __plantd_broker_daemon }}"
   when: plantd_broker_daemon is not defined
+
+- name: Define plantd_broker_srcdir
+  set_fact:
+    plantd_broker_srcdir: "{{ __plantd_broker_srcdir }}"
+  when: plantd_broker_srcdir is not defined
+
+- name: Define plantd_broker_packages
+  set_fact:
+    plantd_broker_packages: "{{ __plantd_broker_packages | list }}"
+  when: plantd_broker_packages is not defined

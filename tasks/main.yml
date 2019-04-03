@@ -9,21 +9,28 @@
 # TODO: - include_tasks: build.yml
 - name: Get the broker service repository
   git:
-    repo: https://gitlab.com/crdc/apex/broker
-    dest: /usr/src/go/src/gitlab.com/crdc/apex/broker
+    repo: https://gitlab.com/crdc/apex/apex-broker
+    dest: "{{ plantd_broker_srcdir }}"
+    force: yes
   tags: [ "plantd-broker" ]
 
 - name: Build the broker service
-  shell: make all
+  shell: make
   args:
-    chdir: /usr/src/go/src/gitlab.com/crdc/apex/broker
+    chdir: "{{ plantd_broker_srcdir }}"
+  tags: [ "plantd-broker" ]
+
+- name: Install the broker service
+  shell: make install
+  args:
+    chdir: "{{ plantd_broker_srcdir }}"
   tags: [ "plantd-broker" ]
 
 # TODO: - include_tasks: initialize.yml
 # TODO: - include_tasks: configure.yml
 
 - name: Ensure Plantd Broker is started and enabled on boot.
-  service:
+  systemd:
     name: "{{ plantd_broker_daemon }}"
     state: "{{ plantd_broker_service_state }}"
     enabled: "{{ plantd_broker_service_enabled }}"
